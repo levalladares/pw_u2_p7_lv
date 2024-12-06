@@ -10,7 +10,7 @@
 
 <body>
     <div id="myApp">
-        {{ listaFrases }}     
+        {{ listaFrases }}
         <hr>
         <ul>
             <li v-for="mifrase in listaFrases">{{ mifrase.frase }} - {{ mifrase.autor }}
@@ -18,20 +18,23 @@
                 <p>{{ mifrase.frase}}</p>
             </li>
 
-        </ul>    
-        <hr>    
+        </ul>
+        <hr>
         <label for="idfrase">frase:</label>
-        <input id="idfrase" type="text">
+        <input v-model="frase" id="idfrase" type="text">
+        <p> {{ frase }} </p>
         <label for="idautor">autor:</label>
-        <input id="idautor" type="text">
-        <button>agregar</button>
+       <!-- <input v-on:keypress="eventoKeyPress" v-model="autor" id="idautor" type="text"> --> 
+        <input v-on:keypress.enter="eventoKeyPressModificador" v-model="autor" id="idautor" type="text">
+        <button v-on:click="agregarFrase">agregar</button>
+        <button v-on:click="agregarFraseFinal">agregar al final</button>
         <ul>
             <li v-for="{frase,autor} in listaFrases">{{ frase }} - {{ autor }}
-                <button>{{ autor}}</button>
-                <p>{{ frase}}</p>
+                <button v-if="autor!==null">{{autor}}</button>
+                <p v-show="autor!==null">Autor: {{autor}}</p>
             </li>
 
-        </ul>                                                                                                                                                                                                                      
+        </ul>
     </div>
     <script src="../js/appFrases.js"></script>
 </body>
